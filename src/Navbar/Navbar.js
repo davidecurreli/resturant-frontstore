@@ -8,12 +8,14 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setUser({ firstName, lastName });
-    localStorage.setItem('user', JSON.stringify({ firstName, lastName }));
+    setUser({ firstName, lastName, email, phone });
+    localStorage.setItem('user', JSON.stringify({ firstName, lastName, email, phone }));
     setShowModal(false);
   };
 
@@ -26,7 +28,7 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-            <Link to="/" className="navbar-logo">My Demo Restaurant</Link>
+            <Link to="/" className="navbar-logo">H-Ey Demo Restaurant</Link>
             <div className="navbar-links">
             {user ? (
                 <div className="user-info">
@@ -63,6 +65,20 @@ const Navbar = () => {
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="phone"
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 required
               />
               <button type="submit" className="navbar-button">Submit</button>
