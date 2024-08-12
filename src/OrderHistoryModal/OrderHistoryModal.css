@@ -18,7 +18,7 @@
   width: 90%;
   max-width: 500px;
   height: 90%;
-  max-height: 500px;
+  max-height: 200px;
   overflow-y: auto;
   position: relative;
   display: flex;

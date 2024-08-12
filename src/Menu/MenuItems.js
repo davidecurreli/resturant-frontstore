@@ -114,16 +114,22 @@ const MenuItems = () => {
   if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="menu-container">
-      <h1>Our Delicious Menu</h1>
-      {user && (
-        <button onClick={() => setIsOrderHistoryOpen(true)} className="order-history-btn">
-          My Orders
-        </button>
-      )}
+    <div className="menu-container" key={menuItems.length}>
+            <h1>Our Delicious Menu</h1>
+      <div style={{textAlign: 'right'}}>
+        {user && (
+          <button onClick={() => setIsOrderHistoryOpen(true)} className="order-history-btn">
+            My Orders
+          </button>
+        )}
+      </div>
       <div className="menu-grid">
-        {menuItems.map(item => (
-          <div key={item.Id} className="menu-item">
+        {menuItems.map((item, index) => (
+          <div 
+            key={item.Id} 
+            className="menu-item"
+            style={{animationDelay: `${index * 0.1}s`}}
+          >
             <h2>{item.ItemName}</h2>
             <p className="description">{item.Description}</p>
             <div className="item-footer">
