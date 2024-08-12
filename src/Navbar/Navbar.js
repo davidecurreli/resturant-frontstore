@@ -81,7 +81,7 @@ const Navbar = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required
               />
-              <button type="submit" className="navbar-button">Submit</button>
+              <button style={{'margin-left' : '0px'}} type="submit" className="navbar-button">Submit</button>
             </form>
             <button onClick={() => setShowModal(false)} className="close-button">&times;</button>
           </div>

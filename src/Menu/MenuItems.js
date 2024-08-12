@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { UserContext } from '../UserContext';
 import OrderHistoryModal from '../OrderHistoryModal/OrderHistoryModal';
+import SimpleOrderConfirmationModal from '../SimpleOrderConfirmationModal/SimpleOrderConfirmationModal';
 import './MenuItems.css';
+import '../SimpleOrderConfirmationModal/SimpleOrderConfirmationModal.css';
 
 const MenuItems = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -11,12 +13,15 @@ const MenuItems = () => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : {};
   });
+  const [animatedItems, setAnimatedItems] = useState({});
   const [isOrderHistoryOpen, setIsOrderHistoryOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [orderDetails, setOrderDetails] = useState([]);
   const { user } = useContext(UserContext);
+ 
+  const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjM0MTE2MDEsIm5iZiI6MzQxMDI1MjI2OSwiZXhwIjozNDEwMjU1ODY5LCJhdWQiOiJzZDQ1NHZzZHZzNTM0YnNhIiwiaXNzIjoiaHR0cHM6Ly9yZXN0dXJhbnQtb2F1dGguY29tIiwic3ViIjoiOWI0NmM1NjQtZmEyMy0xMWVkLWFlODUtN2IxNDI4MDBhYjFiIiwianRpIjoiZmZjMzk1YmE4YjI3NmQ1ZDA1YjMxZWI0MWFiMGIzMDk3YmViNTFjMWFmMTZmYmY2M2ViMzExOGZlYjRkOTBlZGVhNWY5ZjA2MzY2ZTYwNDcifQ.FZvKGdDboslbAg2N1rbPMfjDzbQ179gUnyuBqDzsrt8062KVyiv5BkTkzNzmmvoLBYNq734xXRE_zzQn_dLjHrwf6xGbpI-sEthxBR_JAyHdnJfG2MDrNfmtC_BTChUN0BJ-9kK4-1wXAZehrcBuxbxEZRmyllHJIR90Cj_y5hcD4eK5igmhDx1AseMM_unXerqnLTXKAngZOa-c7IJItRIjX5_Umz-y63sex7eIbqKYHKGEz5leUBKjHX6IVdYko5cfX1zfXohnzR6pSXPFyLyd1xFjsnQrEpjREyrdwtrEZtBM9QNWNqcrk1bktwLVBdlDZwt7AJAeEOs_mOuGSg';
 
   const fetchMenuItems = useCallback(async () => {
-    const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjM0MTE2MDEsIm5iZiI6MzQxMDI1MjI2OSwiZXhwIjozNDEwMjU1ODY5LCJhdWQiOiJzZDQ1NHZzZHZzNTM0YnNhIiwiaXNzIjoiaHR0cHM6Ly9yZXN0dXJhbnQtb2F1dGguY29tIiwic3ViIjoiOWI0NmM1NjQtZmEyMy0xMWVkLWFlODUtN2IxNDI4MDBhYjFiIiwianRpIjoiZmZjMzk1YmE4YjI3NmQ1ZDA1YjMxZWI0MWFiMGIzMDk3YmViNTFjMWFmMTZmYmY2M2ViMzExOGZlYjRkOTBlZGVhNWY5ZjA2MzY2ZTYwNDcifQ.FZvKGdDboslbAg2N1rbPMfjDzbQ179gUnyuBqDzsrt8062KVyiv5BkTkzNzmmvoLBYNq734xXRE_zzQn_dLjHrwf6xGbpI-sEthxBR_JAyHdnJfG2MDrNfmtC_BTChUN0BJ-9kK4-1wXAZehrcBuxbxEZRmyllHJIR90Cj_y5hcD4eK5igmhDx1AseMM_unXerqnLTXKAngZOa-c7IJItRIjX5_Umz-y63sex7eIbqKYHKGEz5leUBKjHX6IVdYko5cfX1zfXohnzR6pSXPFyLyd1xFjsnQrEpjREyrdwtrEZtBM9QNWNqcrk1bktwLVBdlDZwt7AJAeEOs_mOuGSg';
-
     try {
       const response = await fetch('http://localhost:14289/menu/api/MenuItem/Get', {
         headers: {
@@ -68,20 +73,13 @@ const MenuItems = () => {
   }, [cart]);
 
   const addToCart = useCallback((item) => {
-    setCart(prevCart => {
-      const newCart = {
-        ...prevCart,
-        [item.Id]: (prevCart[item.Id] || 0) + 1
-      };
-      return newCart;
-    });
+    setCart(prevCart => ({
+      ...prevCart,
+      [item.Id]: (prevCart[item.Id] || 0) + 1
+    }));
     
-    // Add the 'item-added' class to the cart item
-    const cartItem = document.querySelector(`[data-item-id="${item.Id}"]`);
-    if (cartItem) {
-      cartItem.classList.add('item-added');
-      setTimeout(() => cartItem.classList.remove('item-added'), 300);
-    }
+    setAnimatedItems(prev => ({ ...prev, [item.Id]: true }));
+    setTimeout(() => setAnimatedItems(prev => ({ ...prev, [item.Id]: false })), 300);
   }, []);
 
   const removeFromCart = useCallback((itemId) => {
@@ -94,28 +92,69 @@ const MenuItems = () => {
       }
       return newCart;
     });
+
+    setAnimatedItems(prev => ({ ...prev, [itemId]: true }));
+    setTimeout(() => setAnimatedItems(prev => ({ ...prev, [itemId]: false })), 300);
   }, []);
 
   const emptyCart = useCallback(() => {
     setCart({});
   }, []);
 
-  const submitOrder = useCallback(() => {
+  const submitOrder = useCallback(async () => {
     if (!user) {
       alert("Please sign in to submit an order.");
       return;
     }
-    console.log("Order submitted:", cart);
-    alert("Order submitted successfully!");
-    setCart({});
-  }, [cart, user]);
+    const payload = {
+      OrderItems: cart,
+      CustomerEmail: user.email,
+      CustomerFirstname: user.firstName,
+      CustomerLastname: user.lastName,
+      CustomerPhone: user.phone
+    };
+
+    try {
+      const response = await fetch('http://localhost:14289/orders/api/order/SaveOrder', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit order');
+      }
+
+      const data = await response.json();
+      console.log("Order submitted successfully:", data);
+      
+      // Prepare order details for the confirmation modal
+      const details = Object.entries(cart).map(([itemId, quantity]) => {
+        const item = menuItems.find(item => item.Id === parseInt(itemId));
+        return `${item.ItemName} x ${quantity}`;
+      });
+      setOrderDetails(details);
+      
+      // Open the confirmation modal
+      setIsConfirmationOpen(true);
+      
+      // Clear the cart
+      setCart({});
+    } catch (error) {
+      console.error("Error submitting order:", error);
+      alert("Failed to submit order. Please try again.");
+    }
+  }, [cart, user, menuItems]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="menu-container" key={menuItems.length}>
-            <h1>Our Delicious Menu</h1>
+      <h1>Our Delicious Menu</h1>
       <div style={{textAlign: 'right'}}>
         {user && (
           <button onClick={() => setIsOrderHistoryOpen(true)} className="order-history-btn">
@@ -141,7 +180,7 @@ const MenuItems = () => {
         ))}
       </div>
       <div className="cart">
-        <h2>My Delicious Cart</h2>
+      <h2>My Delicious Cart</h2>
         {Object.keys(cart).length === 0 ? (
           <p>Your cart is empty :(</p>
         ) : (
@@ -150,10 +189,13 @@ const MenuItems = () => {
               const item = menuItems.find(item => item.Id === parseInt(itemId));
               if (!item) return null; // Skip if item not found in menu
               return (
-                <div key={itemId} className="cart-item" data-item-id={itemId}>
+                <div 
+                  key={itemId} 
+                  className={`cart-item ${animatedItems[item.Id] ? 'item-added' : ''}`}
+                >
                   <span>{item.ItemName}</span>
                   <div>
-                    <button onClick={() => removeFromCart(itemId)}>-</button>
+                    <button onClick={() => removeFromCart(item.Id)}>-</button>
                     <span>{quantity}</span>
                     <button onClick={() => addToCart(item)}>+</button>
                   </div>
@@ -177,6 +219,11 @@ const MenuItems = () => {
       <OrderHistoryModal 
         isOpen={isOrderHistoryOpen} 
         onClose={() => setIsOrderHistoryOpen(false)} 
+      />
+      <SimpleOrderConfirmationModal
+        isOpen={isConfirmationOpen}
+        onClose={() => setIsConfirmationOpen(false)}
+        orderDetails={orderDetails}
       />
     </div>
   );

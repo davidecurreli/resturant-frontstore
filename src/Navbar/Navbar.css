@@ -76,6 +76,7 @@
     border-radius: 10px;
     position: relative;
     width: 300px;
+    height: 400px;
     max-width: 90%;
     animation: modalFadeIn 0.3s ease-out;
   }
