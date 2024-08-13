@@ -57,7 +57,7 @@
     margin-right: 15px;
   }
   
-  .modal-overlay {
+  .nav-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -70,13 +70,12 @@
     z-index: 1001;
   }
   
-  .modal-content {
+  .nav-modal-content {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     position: relative;
     width: 300px;
-    height: 400px;
     max-width: 90%;
     animation: modalFadeIn 0.3s ease-out;
   }
@@ -92,17 +91,17 @@
     }
   }
   
-  .modal-content h2 {
+  .nav-modal-content h2 {
     margin-top: 0;
     color: #2c3e50;
   }
   
-  .modal-content form {
+  .nav-modal-content form {
     display: flex;
     flex-direction: column;
   }
   
-  .modal-content input {
+  .nav-modal-content input {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ddd;

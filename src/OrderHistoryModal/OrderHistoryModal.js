@@ -101,7 +101,7 @@ const OrderHistoryModal = ({ isOpen, onClose }) => {
                   <td>{new Date(order.orderDate).toLocaleString()}</td>
                   <td>${order.totalAmount.toFixed(2)}</td>
                   <td>{order.status}</td>
-                  <td style={{'text-align':'center'}}>
+                  <td style={{'textAlign':'center'}}>
                     <button className="view-details-button" onClick={() => fetchOrderDetails(order.id)}>
                       View Details
                     </button>

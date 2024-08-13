@@ -49,8 +49,8 @@ const Navbar = () => {
       </nav>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="nav-modal-overlay">
+          <div className="nav-modal-content">
             <h2>Log In</h2>
             <form onSubmit={handleLogin}>
               <input
@@ -81,7 +81,7 @@ const Navbar = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required
               />
-              <button style={{'margin-left' : '0px'}} type="submit" className="navbar-button">Submit</button>
+              <button style={{'marginLeft' : '0px'}} type="submit" className="navbar-button">Submit</button>
             </form>
             <button onClick={() => setShowModal(false)} className="close-button">&times;</button>
           </div>
