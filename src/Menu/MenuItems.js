@@ -23,7 +23,7 @@ const MenuItems = () => {
 
   const fetchMenuItems = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:14289/menu/api/MenuItem/Get', {
+      const response = await fetch('http://localhost:14289/front/api/MenuItem/Get', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

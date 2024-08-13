@@ -6,6 +6,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.loading {
+  margin-top: 20%;
+}
+
 .menu-container {
   max-width: 1200px;
   margin: 80px auto 0;
