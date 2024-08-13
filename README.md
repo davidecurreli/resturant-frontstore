@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# H-Ey Demo Restaurant Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the H-Ey Demo Restaurant Application! This React-based web application simulates a restaurant's online ordering system with user authentication, menu display, cart functionality, and order history.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 1. User Authentication
+- Users can log in with their first name, last name, email, and phone number.
+- User information is stored locally for persistent sessions.
+- Logged-in users can access additional features like submitting orders and viewing order history.
 
-### `npm start`
+### 2. Interactive Menu
+- Displays a grid of menu items.
+- Each menu item shows:
+  - Item name
+  - Description
+  - Price
+  - Category
+- Animated entry of menu items for a smooth user experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. Shopping Cart
+- Users can add items to their cart directly from the menu.
+- The cart displays:
+  - Item names
+  - Quantities
+  - Individual item totals
+  - Overall cart total
+- Users can adjust item quantities or remove items from the cart.
+- The cart persists across sessions using local storage.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 4. Order Submission
+- Logged-in users can submit their orders.
+- Orders are sent to a backend API for processing.
+- Upon successful submission, users receive an order confirmation.
 
-### `npm test`
+### 5. Order History
+- Logged-in users can view their order history.
+- Displays past orders with details like order ID, date, total amount, and status.
+- Users can view detailed information for each past order.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 6. Responsive Design
+- The application is designed to work seamlessly on both desktop and mobile devices.
+- Responsive layout adjusts to different screen sizes for optimal viewing.
 
-### `npm run build`
+### 7. About Us Page
+- Provides information about the made up restaurant's story and mission.
+- Showcases key team members with their roles and images.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technical Highlights
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Built with React for a dynamic and efficient user interface.
+- Uses React Router for navigation between different sections of the app.
+- Implements context API for global state management (user authentication).
+- Utilizes local storage for persisting cart and user session data.
+- Integrates with a backend API for menu retrieval and order submission.
+- Implements CSS animations for enhanced user experience.
+- Modular component structure for maintainability and reusability.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm start`
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
