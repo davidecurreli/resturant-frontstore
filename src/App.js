@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { UserProvider } from './UserContext';
 import Navbar from './Navbar/Navbar';
-import MenuItems from './Menu/MenuItems';
+import MenuItems from './MenuItems/MenuItems';
 import About from './About/About';
 import './App.css';
 
